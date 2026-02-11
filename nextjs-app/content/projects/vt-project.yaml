@@ -1,0 +1,12 @@
+title: vt project
+client: vintage travel
+categories: []
+featuredImage: /images/projects/vt-project/featuredImage.jpg
+featured: false
+featuredSize: large
+sampleWork: []
+documents:
+  - label: magazine
+    file: /documents/vt-project/documents/0/file.pdf
+stats: []
+sortOrder: 0
