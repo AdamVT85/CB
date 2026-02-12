@@ -1,9 +1,17 @@
 import { config, fields, collection, singleton } from "@keystatic/core";
 
+const isProd = process.env.NODE_ENV === "production";
+
 export default config({
-  storage: {
-    kind: "local",
-  },
+  storage: isProd
+    ? {
+        kind: "github",
+        repo: "simply-ads/CB",
+        pathPrefix: "nextjs-app",
+      }
+    : {
+        kind: "local",
+      },
   singletons: {
     homepage: singleton({
       label: "Homepage",
