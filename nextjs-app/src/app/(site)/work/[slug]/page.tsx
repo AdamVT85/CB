@@ -1,8 +1,13 @@
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import { BookOpen, Edit3 } from "lucide-react";
 import { reader } from "@/lib/reader";
-import PdfViewer from "@/components/PdfViewer";
+
+const PdfViewer = dynamic(() => import("@/components/PdfViewer"), {
+  ssr: false,
+  loading: () => <div className="p-12 text-center text-charcoal/40">Loading document...</div>,
+});
 
 // Fallback images keyed by slug
 const fallbackImages: Record<string, string[]> = {
