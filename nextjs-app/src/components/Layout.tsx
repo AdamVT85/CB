@@ -32,7 +32,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       ></div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 w-full z-50 px-6 md:px-12 py-6 flex justify-between items-center transition-all duration-500">
+      <nav className="fixed top-0 left-0 w-full z-50 px-6 md:px-12 py-6 flex justify-between items-center transition-all duration-500 bg-cream/80 backdrop-blur-md">
         <Link
           href="/"
           className="text-3xl font-display italic font-bold text-charcoal link-underline z-50 relative"
