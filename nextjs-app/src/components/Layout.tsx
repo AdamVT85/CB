@@ -37,7 +37,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           href="/"
           className="text-3xl font-display italic font-bold text-charcoal link-underline z-50 relative"
         >
-          A.V.
+          C.B.
         </Link>
 
         {/* Desktop Nav */}
@@ -110,7 +110,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-bold uppercase tracking-[0.4em]">
             <div className="text-charcoal flex items-center gap-4">
               <span className="text-xl italic font-display lowercase tracking-normal">
-                a.v.
+                c.b.
               </span>
               <span>Editorial Heritage</span>
             </div>

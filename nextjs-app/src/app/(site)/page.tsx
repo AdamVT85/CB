@@ -322,7 +322,7 @@ export default async function Home() {
               />
             </div>
             <div className="absolute -bottom-10 -right-10 w-32 h-32 md:w-40 md:h-40 bg-terracotta text-cream flex items-center justify-center italic text-3xl font-display shadow-2xl z-20">
-              AV.
+              CB.
             </div>
           </div>
         </div>
