@@ -7,7 +7,7 @@ import { Menu, ArrowUp, X } from "lucide-react";
 
 const navLinks = [
   { label: "Selected Work", path: "/work" },
-  { label: "Services", path: "/#services" },
+  { label: "Services", path: "/services" },
   { label: "About", path: "/about" },
   { label: "Contact", path: "/contact" },
 ];
@@ -46,7 +46,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             ) : (
               navLinks.map((link) => {
-                const active = link.path !== "/#services" && pathname === link.path;
+                const active = pathname === link.path || pathname.startsWith(link.path + "/");
                 return (
                   <Link
                     key={link.path}
@@ -149,7 +149,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <div>
                 <h4 className="fr-label text-[10.5px] tracking-[0.22em] uppercase text-[rgba(246,247,243,0.5)] mb-4">Site</h4>
                 <Link href="/work" className="block py-1 text-paper hover:text-lemon transition-colors text-base">Work</Link>
-                <Link href="/#services" className="block py-1 text-paper hover:text-lemon transition-colors text-base">Services</Link>
+                <Link href="/services" className="block py-1 text-paper hover:text-lemon transition-colors text-base">Services</Link>
                 <Link href="/about" className="block py-1 text-paper hover:text-lemon transition-colors text-base">About</Link>
                 <Link href="/contact" className="block py-1 text-paper hover:text-lemon transition-colors text-base">Contact</Link>
               </div>

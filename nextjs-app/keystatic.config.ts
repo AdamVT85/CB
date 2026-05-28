@@ -97,15 +97,6 @@ export default config({
           label: "Services Meta",
           defaultValue: "Five things I'm good at — and a few I won't pretend to be",
         }),
-        services: fields.array(
-          fields.object({
-            title: fields.text({ label: "Title" }),
-            accent: fields.text({ label: "Accent phrase (azure)" }),
-            dek: fields.text({ label: "Description", multiline: true }),
-            link: fields.text({ label: "Link (optional)" }),
-          }),
-          { label: "Services", itemLabel: (p) => p.fields.title.value || "Service" }
-        ),
       },
     }),
     featuredCase: singleton({
@@ -284,6 +275,49 @@ export default config({
         testimonialAuthor: fields.text({ label: "Testimonial Author" }),
         testimonialRole: fields.text({ label: "Testimonial Role" }),
         nextProject: fields.relationship({ label: "Next Project", collection: "projects" }),
+        sortOrder: fields.number({ label: "Sort Order", defaultValue: 0 }),
+      },
+    }),
+    services: collection({
+      label: "Services",
+      slugField: "title",
+      path: "content/services/*",
+      schema: {
+        title: fields.slug({ name: { label: "Title" } }),
+        titleAccent: fields.text({ label: "Title Accent (azure phrase)" }),
+        eyebrow: fields.text({ label: "Eyebrow", defaultValue: "Service" }),
+        summary: fields.text({
+          label: "Summary / Dek",
+          description: "Short line shown in the services list.",
+          multiline: true,
+        }),
+        mood: fields.select({ label: "Header Mood", options: MOOD_OPTIONS, defaultValue: "ph-azure" }),
+        intro: fields.text({
+          label: "Intro (standfirst, paragraphs separated by blank lines)",
+          multiline: true,
+        }),
+        body: fields.text({
+          label: "Body (paragraphs separated by blank lines)",
+          multiline: true,
+        }),
+        included: fields.array(
+          fields.object({
+            title: fields.text({ label: "Title" }),
+            detail: fields.text({ label: "Detail (3–4 lines)", multiline: true }),
+          }),
+          {
+            label: "What's included",
+            itemLabel: (p) => p.fields.title.value || "Item",
+          }
+        ),
+        relatedProjects: fields.array(
+          fields.relationship({ label: "Project", collection: "projects" }),
+          { label: "Related Work", itemLabel: (p) => p.value || "Project" }
+        ),
+        ctaHeading: fields.text({
+          label: "CTA Heading",
+          defaultValue: "Need this? Let's talk.",
+        }),
         sortOrder: fields.number({ label: "Sort Order", defaultValue: 0 }),
       },
     }),

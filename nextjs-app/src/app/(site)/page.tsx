@@ -2,6 +2,7 @@ import Link from "next/link";
 import { reader } from "@/lib/reader";
 import IllustrationBand from "@/components/IllustrationBand";
 import Accented from "@/components/Accented";
+import ServicesList from "@/components/ServicesList";
 import { paras } from "@/lib/text";
 
 const SIZE_CYCLE = ["work--lg", "work--md", "work--sm", "work--sm", "work--sm", "work--wide", "work--wide"];
@@ -10,6 +11,15 @@ export default async function Home() {
   const home = await reader.singletons.homepage.read();
   const feature = await reader.singletons.featuredCase.read();
   const allProjects = await reader.collections.projects.all();
+  const allServices = await reader.collections.services.all();
+  const services = allServices
+    .sort((a, b) => (a.entry.sortOrder ?? 0) - (b.entry.sortOrder ?? 0))
+    .map((s) => ({
+      slug: s.slug,
+      title: s.entry.title,
+      titleAccent: s.entry.titleAccent,
+      summary: s.entry.summary,
+    }));
 
   const featured = allProjects
     .filter((p) => p.entry.featured)
@@ -36,17 +46,6 @@ export default async function Home() {
           { name: "Cruise Nation", emphasis: false },
           { name: "Tourpreneur", emphasis: true },
           { name: "Urban Adventures", emphasis: false },
-        ];
-
-  const services =
-    home?.services && home.services.length > 0
-      ? home.services
-      : [
-          { title: "Website & destination copy.", accent: "destination", dek: "Landing pages, destination guides, hotel and experience descriptions written to inspire and convert.", link: "" },
-          { title: "Magazines & print editorial.", accent: "print editorial", dek: "Customer magazines, lookbooks, 50–150pp buying guides — the work most freelancers can't credibly pitch for.", link: "" },
-          { title: "B2B reports & lead generation.", accent: "lead generation", dek: "Market reports, white papers, by-lines, sales-enablement content. Position you as the authority.", link: "" },
-          { title: "Podcasts & interview content.", accent: "interview content", dek: "Series concept, editorial planning, interviewing as a service, episode scripting and repurposing.", link: "" },
-          { title: "Strategy, audits & training.", accent: "training", dek: "Content audits, editorial planning, SEO-informed calendars, and travel copywriting workshops.", link: "" },
         ];
 
   const featureNumbers =
@@ -242,22 +241,11 @@ export default async function Home() {
         <div className="container">
           <h2>{home?.servicesTitle ?? "The contents."}</h2>
           <div className="toc-meta">{home?.servicesMeta ?? "Five things I'm good at — and a few I won't pretend to be"}</div>
-          <div className="toc-list">
-            {services.map((s, i) => {
-              const Inner = (
-                <>
-                  <div className="n">{String(i + 1).padStart(2, "0")}</div>
-                  <div className="title"><Accented text={s.title} accent={s.accent} /></div>
-                  <div className="dek">{s.dek}</div>
-                  <div className="page">↗</div>
-                </>
-              );
-              return s.link ? (
-                <Link key={i} href={s.link} className="toc-item">{Inner}</Link>
-              ) : (
-                <div key={i} className="toc-item">{Inner}</div>
-              );
-            })}
+          <ServicesList items={services} />
+          <div className="text-center mt-16">
+            <Link href="/services" className="btn btn--ghost">
+              View all services <span className="arrow">↗</span>
+            </Link>
           </div>
         </div>
       </section>
